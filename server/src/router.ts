@@ -5,7 +5,10 @@ const router = Router();
 /**
  * Conversation
  */
-router.get("/conversation", () => {});
+router.get("/conversation", (req, res) => {
+  res.status(200);
+  res.json({ message: "GET /conversation" });
+});
 router.get("/conversation/:id", () => {});
 router.post("/conversation", () => {});
 router.put("/conversation/:id", () => {});
