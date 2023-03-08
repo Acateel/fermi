@@ -1,5 +1,12 @@
 import { Router } from "express";
 import { body } from "express-validator";
+import {
+  createConversation,
+  deleteConversation,
+  getAllConversations,
+  getConversation,
+  updateConversation,
+} from "./handlers/conversation";
 import { handleInputErrors } from "./modules/middleware";
 
 const router = Router();
@@ -7,24 +14,21 @@ const router = Router();
 /**
  * Conversation
  */
-router.get("/conversation", (req, res) => {
-  res.status(200);
-  res.json({ message: "GET /conversation" });
-});
-router.get("/conversation/:id", () => {});
+router.get("/conversation", getAllConversations);
+router.get("/conversation/:id", getConversation);
 router.post(
   "/conversation",
   body("name").isString(),
   handleInputErrors,
-  () => {}
+  createConversation
 );
 router.put(
   "/conversation/:id",
   body("name").optional().isString(),
   handleInputErrors,
-  () => {}
+  updateConversation
 );
-router.delete("/conversation/:id", () => {});
+router.delete("/conversation/:id", deleteConversation);
 
 /**
  * Message
