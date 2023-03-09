@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { body } from "express-validator";
 import {
+  checkUserInConversation,
   createConversation,
   deleteConversation,
   getAllConversations,
@@ -26,9 +27,10 @@ router.put(
   "/conversation/:id",
   body("name").optional().isString(),
   handleInputErrors,
+  checkUserInConversation,
   updateConversation
 );
-router.delete("/conversation/:id", deleteConversation);
+router.delete("/conversation/:id", checkUserInConversation, deleteConversation);
 
 /**
  * Message

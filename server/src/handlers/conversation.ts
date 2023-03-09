@@ -59,38 +59,42 @@ export const createConversation = async (req, res) => {
 // Undate conversation
 export const updateConversation = async (req, res) => {
   const id = req.params.id;
-  const conversation = await prisma.conversation.findUnique({
+  const undateConv = await prisma.conversation.update({
     where: {
       id,
     },
-    include: {
-      groupMembers: true,
+    data: {
+      name: req.body.name,
     },
   });
-
-  const isInConversation = await conversation.groupMembers.find(
-    (member) => member.userId === req.user.id
-  );
-
-  if (isInConversation) {
-    const undateConv = await prisma.conversation.update({
-      where: {
-        id,
-      },
-      data: {
-        name: req.body.name,
-      },
-    });
-    res.status(200);
-    res.json({ data: undateConv });
-  } else {
-    res.status(401);
-    res.json({ data: "You did not in conversation" });
-  }
+  res.status(200);
+  res.json({ data: undateConv });
 };
 
 // delete conversation
 export const deleteConversation = async (req, res) => {
+  const id = req.params.id;
+  await prisma.message.deleteMany({
+    where: {
+      conversationId: id,
+    },
+  });
+  await prisma.groupMember.deleteMany({
+    where: {
+      conversationId: id,
+    },
+  });
+  const undateConv = await prisma.conversation.deleteMany({
+    where: {
+      id: id,
+    },
+  });
+  res.status(200);
+  res.json({ data: undateConv });
+};
+
+// check if user in conversation for update and delete
+export const checkUserInConversation = async (req, res, next) => {
   const id = req.params.id;
   const conversation = await prisma.conversation.findUnique({
     where: {
@@ -106,23 +110,7 @@ export const deleteConversation = async (req, res) => {
   );
 
   if (isInConversation) {
-    await prisma.message.deleteMany({
-      where: {
-        conversationId: id,
-      },
-    });
-    await prisma.groupMember.deleteMany({
-      where: {
-        conversationId: id,
-      },
-    });
-    const undateConv = await prisma.conversation.deleteMany({
-      where: {
-        id: id,
-      },
-    });
-    res.status(200);
-    res.json({ data: undateConv });
+    next();
   } else {
     res.status(401);
     res.json({ data: "You did not in conversation" });
