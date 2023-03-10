@@ -46,6 +46,20 @@ export const updateMessage = async (req, res) => {
   res.json({ data: message });
 };
 
+// delete message
+export const deleteMessage = async (req, res) => {
+  const id = req.params.id;
+
+  const message = await prisma.message.delete({
+    where: {
+      id: id,
+    },
+  });
+
+  res.status(200);
+  res.json({ data: message });
+};
+
 // check in user create message
 export const checkUsersMessage = async (req, res, next) => {
   const id = req.params.id;

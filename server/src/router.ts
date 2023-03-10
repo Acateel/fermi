@@ -12,6 +12,7 @@ import {
 import {
   checkUsersMessage,
   createMessage,
+  deleteMessage,
   getMessages,
   updateMessage,
 } from "./handlers/message";
@@ -69,7 +70,7 @@ router.put(
   checkUsersMessage,
   updateMessage
 );
-router.delete("/message/:id", () => {});
+router.delete("/message/:id", checkUsersMessage, deleteMessage);
 
 /**
  * GroupMember
