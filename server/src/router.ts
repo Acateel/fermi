@@ -7,8 +7,9 @@ import {
   getAllConversations,
   getConversation,
   updateConversation,
+  handleCheckUserInConversationForMessage,
 } from "./handlers/conversation";
-import { getMessages } from "./handlers/message";
+import { createMessage, getMessages } from "./handlers/message";
 import { handleInputErrors } from "./modules/middleware";
 
 const router = Router();
@@ -47,7 +48,8 @@ router.post(
   body("text").isString(),
   body("conversationId").isString(),
   handleInputErrors,
-  () => {}
+  handleCheckUserInConversationForMessage,
+  createMessage
 );
 router.put(
   "/message/:id",
