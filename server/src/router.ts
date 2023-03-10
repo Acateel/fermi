@@ -9,7 +9,12 @@ import {
   updateConversation,
   handleCheckUserInConversationForMessage,
 } from "./handlers/conversation";
-import { createMessage, getMessages } from "./handlers/message";
+import {
+  checkUsersMessage,
+  createMessage,
+  getMessages,
+  updateMessage,
+} from "./handlers/message";
 import { handleInputErrors } from "./modules/middleware";
 
 const router = Router();
@@ -42,7 +47,13 @@ router.delete(
  * Message
  */
 // get messages by conversation Id
-router.get("/message/:id", handleCheckUserInConversation, getMessages);
+router.get(
+  "/message",
+  body("conversationId").isString(),
+  handleInputErrors,
+  handleCheckUserInConversationForMessage,
+  getMessages
+);
 router.post(
   "/message",
   body("text").isString(),
@@ -53,9 +64,10 @@ router.post(
 );
 router.put(
   "/message/:id",
-  body("text").optional().isString(),
+  body("text").isString(),
   handleInputErrors,
-  () => {}
+  checkUsersMessage,
+  updateMessage
 );
 router.delete("/message/:id", () => {});
 
