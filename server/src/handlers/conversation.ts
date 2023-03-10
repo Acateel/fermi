@@ -94,11 +94,10 @@ export const deleteConversation = async (req, res) => {
 };
 
 // check if user in conversation for update and delete
-export const checkUserInConversation = async (req, res, next) => {
-  const id = req.params.id;
+const checkUserInConversation = async (conversationId, userId) => {
   const conversation = await prisma.conversation.findUnique({
     where: {
-      id: id,
+      id: conversationId,
     },
     include: {
       groupMembers: true,
@@ -106,7 +105,33 @@ export const checkUserInConversation = async (req, res, next) => {
   });
 
   const isInConversation = await conversation.groupMembers.find(
-    (member) => member.userId === req.user.id
+    (member) => member.userId === userId
+  );
+
+  return isInConversation;
+};
+
+export const handleCheckUserInConversation = async (req, res, next) => {
+  const id = req.params.id;
+
+  const isInConversation = await checkUserInConversation(id, req.user.id);
+
+  if (isInConversation) {
+    next();
+  } else {
+    res.status(401);
+    res.json({ data: "You did not in conversation" });
+  }
+};
+
+export const handleCheckUserInConversationForMessage = async (
+  req,
+  res,
+  next
+) => {
+  const isInConversation = await checkUserInConversation(
+    req.body.conversationId,
+    req.user.id
   );
 
   if (isInConversation) {
