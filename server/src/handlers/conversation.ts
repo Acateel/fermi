@@ -93,7 +93,7 @@ export const deleteConversation = async (req, res) => {
   res.json({ data: undateConv });
 };
 
-// check if user in conversation for update and delete
+// check user in conversation return true or false
 const checkUserInConversation = async (conversationId, userId) => {
   const conversation = await prisma.conversation.findUnique({
     where: {
@@ -111,6 +111,7 @@ const checkUserInConversation = async (conversationId, userId) => {
   return isInConversation;
 };
 
+// check if user in conversation for update and delete
 export const handleCheckUserInConversation = async (req, res, next) => {
   const id = req.params.id;
 
@@ -124,6 +125,7 @@ export const handleCheckUserInConversation = async (req, res, next) => {
   }
 };
 
+// check if use in conversation for create message
 export const handleCheckUserInConversationForMessage = async (
   req,
   res,

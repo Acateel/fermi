@@ -8,6 +8,7 @@ import {
   getConversation,
   updateConversation,
 } from "./handlers/conversation";
+import { getMessages } from "./handlers/message";
 import { handleInputErrors } from "./modules/middleware";
 
 const router = Router();
@@ -30,13 +31,17 @@ router.put(
   handleCheckUserInConversation,
   updateConversation
 );
-router.delete("/conversation/:id", handleCheckUserInConversation, deleteConversation);
+router.delete(
+  "/conversation/:id",
+  handleCheckUserInConversation,
+  deleteConversation
+);
 
 /**
  * Message
  */
-router.get("/message", () => {});
-router.get("/message/:id", () => {});
+// get messages by conversation Id
+router.get("/message/:id", handleCheckUserInConversation, getMessages);
 router.post(
   "/message",
   body("text").isString(),
