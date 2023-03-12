@@ -9,7 +9,7 @@ import {
   updateConversation,
   handleCheckUserInConversationForMessage,
 } from "./handlers/conversation";
-import { getAllGroupMembers } from "./handlers/groupMember";
+import { createGroupMember, getAllGroupMembers } from "./handlers/groupMember";
 import {
   checkUsersMessage,
   createMessage,
@@ -83,14 +83,16 @@ router.get(
   handleCheckUserInConversationForMessage,
   getAllGroupMembers
 );
-//router.get("/groupmember/:id", () => {});
+//router.get("/groupmember/:id", () => {}); dont use now
 router.post(
   "/groupmember",
   body("conversationId").isString(),
+  body("userId").isString(),
   handleInputErrors,
-  () => {}
+  handleCheckUserInConversationForMessage,
+  createGroupMember
 );
-router.put("/groupmember/:id", () => {});
+//router.put("/groupmember/:id", () => {}); dont use now
 router.delete("/groupmember/:id", () => {});
 
 export default router;
