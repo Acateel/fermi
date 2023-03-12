@@ -28,3 +28,16 @@ export const createGroupMember = async (req, res) => {
   res.status(200);
   res.json({ data: groupMember });
 };
+
+// delete group member
+export const deleteGroupMember = async (req, res) => {
+  const id = req.params.id;
+  const groupMember = await prisma.groupMember.delete({
+    where: {
+      id: id,
+    },
+  });
+
+  res.status(200);
+  res.json({ data: groupMember });
+};
