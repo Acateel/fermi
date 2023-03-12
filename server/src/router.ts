@@ -9,6 +9,7 @@ import {
   updateConversation,
   handleCheckUserInConversationForMessage,
 } from "./handlers/conversation";
+import { getAllGroupMembers } from "./handlers/groupMember";
 import {
   checkUsersMessage,
   createMessage,
@@ -75,8 +76,14 @@ router.delete("/message/:id", checkUsersMessage, deleteMessage);
 /**
  * GroupMember
  */
-router.get("/groupmember", () => {});
-router.get("/groupmember/:id", () => {});
+router.get(
+  "/groupmember",
+  body("conversationId").isString(),
+  handleInputErrors,
+  handleCheckUserInConversationForMessage,
+  getAllGroupMembers
+);
+//router.get("/groupmember/:id", () => {});
 router.post(
   "/groupmember",
   body("conversationId").isString(),
