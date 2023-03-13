@@ -12,7 +12,6 @@ const connector = connect(mapState, { signIn });
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
 const Login = (props: PropsFromRedux) => {
-  useEffect(() => {}, []);
   return <div>Login</div>;
 };
 

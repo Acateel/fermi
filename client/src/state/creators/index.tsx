@@ -7,12 +7,11 @@ export const signIn =
   (username: string, password: string) =>
   async (dispatch: Dispatch<Action>) => {
     const token = await fermi
-      .post("/singin", {
+      .post("/signin", {
         username,
         password,
       })
       .then((response) => response.data);
-    console.log(token);
     dispatch({
       type: ActionType.SIGN_IN,
       payload: token,
@@ -28,7 +27,6 @@ export const signUp =
         password,
       })
       .then((response) => response.data);
-    console.log(token);
     dispatch({
       type: ActionType.SIGN_IN,
       payload: token,
