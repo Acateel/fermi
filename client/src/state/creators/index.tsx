@@ -53,3 +53,29 @@ export const fetchAllConversation =
       payload: conversations,
     });
   };
+
+export const fetchMessages =
+  (conversationId: String) =>
+  async (dispatch: Dispatch<Action>, getState: () => RootState) => {
+    const token = getState().auth?.token;
+
+    const messages = await fermi
+      .get("/api/message", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        params: {
+          conversationId,
+        },
+      })
+      .then((response) => response.data.data);
+
+    dispatch({
+      type: ActionType.FETCH_MESSAGES,
+      payload: messages,
+    });
+  };
+
+export const removeMessages = () => ({
+  type: ActionType.REMOVE_MESSAGES,
+});
