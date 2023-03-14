@@ -1,0 +1,38 @@
+.login {
+  font-family: "Tilt Neon", cursive;
+  width: 200px;
+  margin: auto;
+  margin-top: 10%;
+}
+
+.login > label {
+  font-size: 1.5em;
+  color: #00abb3;
+}
+
+.login > input {
+  margin: 10px 0px;
+  padding: 5px;
+  border: 3px solid #b2b2b2;
+  border-radius: 5px;
+  background-color: #b2b2b2;
+  font-weight: 500;
+  color: white;
+}
+
+.login > input::placeholder {
+  color: #eaeaea;
+}
+
+.login > button {
+  font-size: 1.3em;
+  font-family: inherit;
+  color: #eaeaea;
+  background-color: #00abb3;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 4px;
+  width: 60%;
+  margin: 10px 25px;
+}
