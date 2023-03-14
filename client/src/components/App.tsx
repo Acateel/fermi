@@ -1,5 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Login from "./auth/Login";
+import Conversation from "./conversation/Conversation";
 import ConversationList from "./conversation/ConversationList";
 
 const router = createBrowserRouter([
@@ -14,6 +15,10 @@ const router = createBrowserRouter([
   {
     path: "/conversation",
     element: <ConversationList />,
+  },
+  {
+    path: "/conversation/:id",
+    element: <Conversation />,
   },
 ]);
 
