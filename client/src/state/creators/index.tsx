@@ -60,12 +60,9 @@ export const fetchMessages =
     const token = getState().auth?.token;
 
     const messages = await fermi
-      .get("/api/message", {
+      .get(`/api/message/${conversationId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
-        },
-        params: {
-          conversationId,
         },
       })
       .then((response) => response.data.data);
