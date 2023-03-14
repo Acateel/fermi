@@ -2,9 +2,10 @@ import prisma from "../db";
 
 //get all in conversation
 export const getMessages = async (req, res) => {
+  const id = req.params.id;
   const conversation = await prisma.conversation.findUnique({
     where: {
-      id: req.body.conversationId,
+      id: id,
     },
     include: {
       messages: true,

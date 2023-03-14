@@ -53,13 +53,7 @@ router.delete(
  * Message
  */
 // get messages by conversation Id
-router.get(
-  "/message",
-  body("conversationId").isString(),
-  handleInputErrors,
-  handleCheckUserInConversationForMessage,
-  getMessages
-);
+router.get("/message/:id", handleCheckUserInConversation, getMessages);
 router.post(
   "/message",
   body("text").isString(),
