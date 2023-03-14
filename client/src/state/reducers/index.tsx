@@ -4,7 +4,7 @@ import conversationReducer from "./conversationReducer";
 
 const reducers = combineReducers({
   auth: authReducer,
-  conversation: conversationReducer,
+  conversations: conversationReducer,
 });
 
 export default reducers;
