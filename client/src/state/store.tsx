@@ -4,7 +4,7 @@ import { save, load } from "redux-sessionstorage-simple";
 
 export const store = configureStore({
   reducer: reducers,
-  preloadedState: load(),
+  //preloadedState: load(), commenting for developing auth
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().prepend(save()),
 });
 
