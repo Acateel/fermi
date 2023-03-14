@@ -1,4 +1,4 @@
-import { ActionType, Token } from "../types";
+import { ActionType, Conversation, Token } from "../types";
 
 interface SignIn {
   type: ActionType.SIGN_IN;
@@ -14,7 +14,9 @@ interface SignOut {
   type: ActionType.SIGN_OUT;
 }
 
-export type Action = 
-    | SignIn 
-    | SignUp 
-    | SignOut;
+interface FetchAllConversation {
+  type: ActionType.FETCH_ALL_CONVERSATION;
+  payload: Conversation[];
+}
+
+export type Action = SignIn | SignUp | SignOut | FetchAllConversation;

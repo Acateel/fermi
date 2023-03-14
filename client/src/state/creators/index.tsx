@@ -1,6 +1,7 @@
 import { Dispatch } from "redux";
 import fermi from "../../api/fermi";
 import { Action } from "../actions";
+import { RootState } from "../store";
 import { ActionType } from "../types";
 
 export const signIn =
@@ -34,3 +35,21 @@ export const signUp =
   };
 
 export const signOut = () => ({ type: ActionType.SIGN_OUT });
+
+export const fetchAllConversation =
+  () => async (dispatch: Dispatch<Action>, getState: () => RootState) => {
+    const token = getState().auth?.token;
+
+    const conversations = await fermi
+      .get("/api/conversation", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => response.data.data);
+
+    dispatch({
+      type: ActionType.FETCH_ALL_CONVERSATION,
+      payload: conversations,
+    });
+  };
