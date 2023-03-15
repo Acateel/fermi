@@ -5,7 +5,7 @@ import {
   removeMessages,
   fetchAllConversation,
 } from "../../state/creators";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Fragment, useEffect } from "react";
 import "./Conversation.css";
 
@@ -46,6 +46,9 @@ const Conversation = (props: PropsFromRedux) => {
 
   const renderedTitle = () => (
     <div className="conversation_title">
+      <Link className="back-arrow" to="/conversation">
+        <img src="/back-arrow.png" />
+      </Link>
       <p>{props.conversations?.find((conv) => conv.id === id)?.name}</p>
     </div>
   );

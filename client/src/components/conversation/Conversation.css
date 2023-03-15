@@ -18,8 +18,21 @@
 }
 
 .conversation_title {
+  display: flex;
+  align-items: center;
   background-color: #17212b;
   height: 50px;
   line-height: 0;
   padding: 1px 20px;
+}
+
+.back-arrow {
+  height: 100%;
+  margin-right: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.back-arrow > img {
+  height: 80%;
 }
