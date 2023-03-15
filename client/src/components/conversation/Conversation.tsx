@@ -35,15 +35,12 @@ const Conversation = (props: PropsFromRedux) => {
   }, []);
 
   const renderedMessages = () =>
-    props.messages
-      ?.slice()
-      .reverse()
-      .map((message) => (
-        <div className="message" key={message.id.toString()}>
-          <p className="message_sender">{message.senderId}</p>
-          <p className="message_text">{message.text}</p>
-        </div>
-      ));
+    props.messages?.map((message) => (
+      <div className="message" key={message.id.toString()}>
+        <p className="message_sender">{message.senderId}</p>
+        <p className="message_text">{message.text}</p>
+      </div>
+    ));
 
   const renderedTitle = () => (
     <div className="conversation_title">

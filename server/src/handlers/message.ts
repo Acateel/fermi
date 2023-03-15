@@ -12,6 +12,9 @@ export const getMessages = async (req, res) => {
     },
   });
 
+  // sort by creating time 
+  conversation.messages.sort((o1,o2) => (o1.createAt.getTime() - o2.createAt.getTime()))
+
   res.status(200);
   res.json({ data: conversation.messages });
 };
