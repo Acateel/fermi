@@ -8,6 +8,7 @@ import {
 import { Link, useParams } from "react-router-dom";
 import { Fragment, useEffect } from "react";
 import "./Conversation.css";
+import SendMessage from "./SendMessage";
 
 const mapState = (state: RootState) => ({
   conversations: state.conversations,
@@ -57,6 +58,7 @@ const Conversation = (props: PropsFromRedux) => {
     <Fragment>
       {renderedTitle()}
       <div className="message_list">{renderedMessages()}</div>
+      <SendMessage />
     </Fragment>
   );
 };

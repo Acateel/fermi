@@ -76,3 +76,25 @@ export const fetchMessages =
 export const removeMessages = () => ({
   type: ActionType.REMOVE_MESSAGES,
 });
+
+export const sendMessage =
+  (text: string, conversationId: string) =>
+  async (dispatch: Dispatch<Action>, getState: () => RootState) => {
+    const token = getState().auth?.token;
+
+    await fermi.post(
+      "/api/message",
+      {
+        text,
+        conversationId,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    
+    // update messages after send message
+    fetchMessages(conversationId)(dispatch, getState);
+  };
