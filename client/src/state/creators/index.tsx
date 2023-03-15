@@ -94,7 +94,7 @@ export const sendMessage =
         },
       }
     );
-    
+
     // update messages after send message
-    fetchMessages(conversationId)(dispatch, getState);
+    await fetchMessages(conversationId)(dispatch, getState);
   };
