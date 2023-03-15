@@ -1,7 +1,11 @@
+.message_list {
+  margin: 70px 0;
+}
+
 .message {
   background-color: #182533;
   border-radius: 10px;
-  width: 400px;
+  width: 40%;
   line-height: 5px;
   padding: 1px;
   margin: 15px;
@@ -15,9 +19,15 @@
 
 .message_text {
   margin: 15px 10px;
+  line-height: 1.1em;
+  font-weight: 300;
+  letter-spacing: 0.02em;
 }
 
 .conversation_title {
+  position: fixed;
+  top: 0;
+  width: 100%;
   display: flex;
   align-items: center;
   background-color: #17212b;

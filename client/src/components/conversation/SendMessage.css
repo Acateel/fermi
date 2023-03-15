@@ -1,0 +1,39 @@
+.send_message {
+    padding: 0px 20px;
+    height: 50px;
+    width: 100%;
+    background-color: #17212b;
+    
+    position: fixed;
+    bottom: 0;
+    
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.send_message_text {
+    background-color: inherit;
+    border: none;
+    width: 100%;
+    height: 100%;
+    outline: none;
+    color: inherit;
+}
+
+.send_message_text::placeholder {
+    color: #4f5b54;
+}
+
+.send_message_send {
+    background-color: inherit;
+    border: none;
+    cursor: pointer;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.send_message_send > img {
+    height: 70%;
+}

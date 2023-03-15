@@ -4,4 +4,9 @@ body {
   padding: 0;
   background-color: #0e1621;
   color: #fafafa;
+  box-sizing: border-box;
+}
+
+* {
+  box-sizing: border-box;
 }

@@ -2,6 +2,7 @@ import { FormEvent, useState } from "react";
 import { connect, ConnectedProps } from "react-redux";
 import { useParams } from "react-router-dom";
 import { sendMessage } from "../../state/creators";
+import "./SendMessage.css";
 
 const connector = connect(null, { sendMessage });
 
@@ -20,14 +21,17 @@ const SendMessage = (props: PropsFromRedux) => {
   };
 
   return (
-    <form onSubmit={onSendMessage}>
+    <form className="send_message" onSubmit={onSendMessage}>
       <input
+        className="send_message_text"
         type="text"
         placeholder="Write message..."
         value={text}
         onChange={(e) => setText(e.target.value)}
       />
-      <button type="submit"></button>
+      <button className="send_message_send" type="submit">
+        <img src="/send-icon.png" />
+      </button>
     </form>
   );
 };
