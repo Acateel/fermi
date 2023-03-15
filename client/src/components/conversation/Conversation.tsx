@@ -7,6 +7,7 @@ import {
 } from "../../state/creators";
 import { useParams } from "react-router-dom";
 import { Fragment, useEffect } from "react";
+import "./Conversation.css";
 
 const mapState = (state: RootState) => ({
   conversations: state.conversations,
@@ -33,23 +34,26 @@ const Conversation = (props: PropsFromRedux) => {
   }, []);
 
   const renderedMessages = () =>
-    props.messages?.map((message) => (
-      <div className="message">
-        <h4>{message.senderId}</h4>
-        <h3>{message.text}</h3>
-      </div>
-    ));
+    props.messages
+      ?.slice()
+      .reverse()
+      .map((message) => (
+        <div className="message" key={message.id.toString()}>
+          <p className="message_sender">{message.senderId}</p>
+          <p className="message_text">{message.text}</p>
+        </div>
+      ));
 
   const renderedTitle = () => (
-    <div>
-      <h2>{props.conversations?.find((conv) => conv.id === id)?.name}</h2>
+    <div className="conversation_title">
+      <p>{props.conversations?.find((conv) => conv.id === id)?.name}</p>
     </div>
   );
 
   return (
     <Fragment>
       {renderedTitle()}
-      {renderedMessages()}
+      <div className="message_list">{renderedMessages()}</div>
     </Fragment>
   );
 };

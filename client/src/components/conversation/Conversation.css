@@ -1,0 +1,25 @@
+.message {
+  background-color: #182533;
+  border-radius: 10px;
+  width: 400px;
+  line-height: 5px;
+  padding: 1px;
+  margin: 15px;
+}
+
+.message_sender {
+  color: #62d4e3;
+  line-height: 0;
+  margin: 15px 15px 30px 10px;
+}
+
+.message_text {
+  margin: 15px 10px;
+}
+
+.conversation_title {
+  background-color: #17212b;
+  height: 50px;
+  line-height: 0;
+  padding: 1px 20px;
+}
