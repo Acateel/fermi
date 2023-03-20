@@ -99,4 +99,10 @@ router.delete(
   deleteGroupMember
 );
 
+/**
+ * Upload images
+ */
+router.post("/userimage", () => {});
+router.post("/conversationimage", () => {});
+
 export default router;
