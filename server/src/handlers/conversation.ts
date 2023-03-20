@@ -112,7 +112,7 @@ const checkUserInConversation = async (conversationId, userId) => {
 };
 
 // check if user in conversation for update and delete
-export const handleCheckUserInConversation = async (req, res, next) => {
+export const checkUserInConversationByParams = async (req, res, next) => {
   const id = req.params.id;
 
   const isInConversation = await checkUserInConversation(id, req.user.id);
@@ -126,11 +126,7 @@ export const handleCheckUserInConversation = async (req, res, next) => {
 };
 
 // check if use in conversation for create message
-export const handleCheckUserInConversationForMessage = async (
-  req,
-  res,
-  next
-) => {
+export const checkUserInConversationByBody = async (req, res, next) => {
   const isInConversation = await checkUserInConversation(
     req.body.conversationId,
     req.user.id

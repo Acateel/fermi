@@ -1,19 +1,24 @@
 import { Router } from "express";
 import { body } from "express-validator";
 import {
-  handleCheckUserInConversation,
+  checkUserInConversationByParams,
   createConversation,
   deleteConversation,
   getAllConversations,
   getConversation,
   updateConversation,
-  handleCheckUserInConversationForMessage,
+  checkUserInConversationByBody,
 } from "./handlers/conversation";
 import {
   createGroupMember,
   deleteGroupMember,
   getAllGroupMembers,
 } from "./handlers/groupMember";
+import {
+  checkImage,
+  uploadConversationImage,
+  uploadUserImage,
+} from "./handlers/image";
 import {
   checkUsersMessage,
   createMessage,
@@ -40,12 +45,12 @@ router.put(
   "/conversation/:id",
   body("name").optional().isString(),
   handleInputErrors,
-  handleCheckUserInConversation,
+  checkUserInConversationByParams,
   updateConversation
 );
 router.delete(
   "/conversation/:id",
-  handleCheckUserInConversation,
+  checkUserInConversationByParams,
   deleteConversation
 );
 
@@ -53,13 +58,13 @@ router.delete(
  * Message
  */
 // get messages by conversation Id
-router.get("/message/:id", handleCheckUserInConversation, getMessages);
+router.get("/message/:id", checkUserInConversationByParams, getMessages);
 router.post(
   "/message",
   body("text").isString(),
   body("conversationId").isString(),
   handleInputErrors,
-  handleCheckUserInConversationForMessage,
+  checkUserInConversationByBody,
   createMessage
 );
 router.put(
@@ -78,7 +83,7 @@ router.get(
   "/groupmember",
   body("conversationId").isString(),
   handleInputErrors,
-  handleCheckUserInConversationForMessage,
+  checkUserInConversationByBody,
   getAllGroupMembers
 );
 //router.get("/groupmember/:id", () => {}); dont use now
@@ -87,7 +92,7 @@ router.post(
   body("conversationId").isString(),
   body("userId").isString(),
   handleInputErrors,
-  handleCheckUserInConversationForMessage,
+  checkUserInConversationByBody,
   createGroupMember
 );
 //router.put("/groupmember/:id", () => {}); dont use now
@@ -95,14 +100,21 @@ router.delete(
   "/groupmember/:id",
   body("conversationId").isString(),
   handleInputErrors,
-  handleCheckUserInConversationForMessage,
+  checkUserInConversationByBody,
   deleteGroupMember
 );
 
 /**
  * Upload images
  */
-router.post("/userimage", () => {});
-router.post("/conversationimage", () => {});
+router.post("/userimage", checkImage, uploadUserImage);
+router.post(
+  "/conversationimage",
+  body("conversationId").isString(),
+  handleInputErrors,
+  checkUserInConversationByBody,
+  checkImage,
+  uploadConversationImage
+);
 
 export default router;
