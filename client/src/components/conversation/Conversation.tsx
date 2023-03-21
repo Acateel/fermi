@@ -13,6 +13,7 @@ import SendMessage from "./SendMessage";
 const mapState = (state: RootState) => ({
   conversations: state.conversations,
   messages: state.messages,
+  auth: state.auth,
 });
 
 const connector = connect(mapState, {
@@ -36,8 +37,13 @@ const Conversation = (props: PropsFromRedux) => {
 
   const renderedMessages = () =>
     props.messages?.map((message) => (
-      <div className="message" key={message.id.toString()}>
-        <p className="message_sender">{message.senderId}</p>
+      <div
+        className={
+          message.senderId === props.auth?.user.id ? "my_message" : "message"
+        }
+        key={message.id.toString()}
+      >
+        <p className="message_sender">{message.sender.username}</p>
         <p className="message_text">{message.text}</p>
       </div>
     ));

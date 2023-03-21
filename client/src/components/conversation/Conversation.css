@@ -2,13 +2,22 @@
   margin: 70px 0;
 }
 
-.message {
-  background-color: #182533;
+.message,
+.my_message {
   border-radius: 10px;
   width: 40%;
   line-height: 5px;
   padding: 1px;
   margin: 15px;
+}
+
+.message {
+  background-color: #182533;
+}
+
+.my_message {
+  background-color: #2b5278;
+  margin-left: auto;
 }
 
 .message_sender {
