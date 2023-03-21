@@ -1,5 +1,6 @@
 import prisma from "../db";
 import upload from "../modules/cloudinary";
+import { excludePassword } from "./user";
 
 // check image
 export const checkImage = async (req, res, next) => {
@@ -36,7 +37,7 @@ export const uploadUserImage = async (req, res) => {
     },
   });
 
-  res.status(200).json({ data: updatedUser });
+  res.status(200).json({ data: excludePassword(updatedUser) });
 };
 
 // upload conversation image
@@ -44,7 +45,7 @@ export const uploadConversationImage = async (req, res) => {
   const { image } = req.files;
   const cloudFile = await upload(image.tempFilePath);
 
-  const updatedUser = await prisma.conversation.update({
+  const updatedConversation = await prisma.conversation.update({
     where: {
       id: req.body.conversationId,
     },
@@ -53,5 +54,5 @@ export const uploadConversationImage = async (req, res) => {
     },
   });
 
-  res.status(200).json({ data: updatedUser });
+  res.status(200).json({ data: updatedConversation });
 };
