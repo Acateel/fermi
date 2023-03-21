@@ -36,17 +36,26 @@ const Conversation = (props: PropsFromRedux) => {
   }, []);
 
   const renderedMessages = () =>
-    props.messages?.map((message) => (
-      <div
-        className={
-          message.senderId === props.auth?.user.id ? "my_message" : "message"
-        }
-        key={message.id.toString()}
-      >
-        <p className="message_sender">{message.sender.username}</p>
-        <p className="message_text">{message.text}</p>
-      </div>
-    ));
+    props.messages?.map((message) => {
+      const messageClassName =
+        message.senderId === props.auth?.user.id ? "my_message" : "message";
+      const isMyMessage = messageClassName === "my_message";
+      const senderImage = message.sender.image ?? "/user-icon.png";
+      return (
+        <div className={messageClassName} key={message.id.toString()}>
+          {!isMyMessage && (
+            <img className="message_sender_image" src={senderImage} />
+          )}
+          <div className="message_body">
+            <p className="message_sender">{message.sender.username}</p>
+            <p className="message_text">{message.text}</p>
+          </div>
+          {isMyMessage && (
+            <img className="message_sender_image" src={senderImage} />
+          )}
+        </div>
+      );
+    });
 
   const renderedTitle = () => {
     const conversation = props.conversations?.find((conv) => conv.id === id);

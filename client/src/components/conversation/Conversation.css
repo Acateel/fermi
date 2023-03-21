@@ -2,8 +2,7 @@
   margin: 70px 0;
 }
 
-.message,
-.my_message {
+.message_body {
   border-radius: 10px;
   width: 40%;
   line-height: 5px;
@@ -11,13 +10,31 @@
   margin: 15px;
 }
 
-.message {
+.message > .message_body {
   background-color: #182533;
+  border-bottom-left-radius: 0%;
+}
+
+.my_message > .message_body {
+  background-color: #2b5278;
+  border-bottom-right-radius: 0%;
+}
+
+.message,
+.my_message {
+  display: flex;
+  align-items: end;
+  margin: 20px;
 }
 
 .my_message {
-  background-color: #2b5278;
-  margin-left: auto;
+  justify-content: end;
+}
+
+.message_sender_image {
+  height: 60px;
+  width: 60px;
+  border-radius: 100%;
 }
 
 .message_sender {
