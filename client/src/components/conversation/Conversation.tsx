@@ -48,14 +48,20 @@ const Conversation = (props: PropsFromRedux) => {
       </div>
     ));
 
-  const renderedTitle = () => (
-    <div className="conversation_title">
-      <Link className="back-arrow" to="/conversation">
-        <img src="/back-arrow.png" />
-      </Link>
-      <p>{props.conversations?.find((conv) => conv.id === id)?.name}</p>
-    </div>
-  );
+  const renderedTitle = () => {
+    const conversation = props.conversations?.find((conv) => conv.id === id);
+    const conversationTitle = conversation?.name;
+    const conversationImage = conversation?.image ?? "/chat-icon.png";
+    return (
+      <div className="conversation_title">
+        <Link className="back-arrow" to="/conversation">
+          <img src="/back-arrow.png" />
+        </Link>
+        <img src={conversationImage} />
+        <p>{conversationTitle}</p>
+      </div>
+    );
+  };
 
   return (
     <Fragment>

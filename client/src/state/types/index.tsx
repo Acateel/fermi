@@ -16,6 +16,7 @@ export interface Conversation {
   id: String;
   createAt: Date;
   name: String;
+  image: string;
 }
 
 export interface Message {
@@ -31,5 +32,5 @@ export interface User {
   id: String;
   createAt: Date;
   username: String;
-  image: String;
+  image: string;
 }
