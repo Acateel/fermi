@@ -9,6 +9,7 @@ export enum ActionType {
 
 export interface Token {
   token: String;
+  user: User;
 }
 
 export interface Conversation {
@@ -22,5 +23,13 @@ export interface Message {
   createAt: Date;
   text: String;
   senderId: String;
+  sender: User;
   conversationId: String;
+}
+
+export interface User {
+  id: String;
+  createAt: Date;
+  username: String;
+  image: String;
 }
