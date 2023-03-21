@@ -1,4 +1,5 @@
 import prisma from "../db";
+import { excludePassword } from "./user";
 
 //get all in conversation
 export const getMessages = async (req, res) => {
@@ -8,15 +9,26 @@ export const getMessages = async (req, res) => {
       id: id,
     },
     include: {
-      messages: true,
+      messages: {
+        include: {
+          sender: true,
+        },
+      },
     },
   });
 
-  // sort by creating time 
-  conversation.messages.sort((o1,o2) => (o1.createAt.getTime() - o2.createAt.getTime()))
+  // sort by creating time
+  conversation.messages.sort(
+    (o1, o2) => o1.createAt.getTime() - o2.createAt.getTime()
+  );
+
+  const returnedMessages = conversation.messages.map((message) => ({
+    ...message,
+    sender: excludePassword(message.sender),
+  }));
 
   res.status(200);
-  res.json({ data: conversation.messages });
+  res.json({ data: returnedMessages });
 };
 
 // create message
