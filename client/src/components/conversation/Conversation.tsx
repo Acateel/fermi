@@ -5,10 +5,12 @@ import {
   removeMessages,
   fetchAllConversation,
 } from "../../state/creators";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { Fragment, useEffect, useRef } from "react";
 import "./Conversation.css";
 import SendMessage from "./SendMessage";
+import ConversationTitle from "./ConversationTitle";
+import MessageCart from "./MessageCart";
 
 const mapState = (state: RootState) => ({
   conversations: state.conversations,
@@ -36,58 +38,30 @@ const Conversation = (props: PropsFromRedux) => {
   }, []);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
-
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
-
   useEffect(() => {
     scrollToBottom();
   }, [props.messages]);
 
   const renderedMessages = () =>
-    props.messages?.map((message) => {
-      const messageClassName =
-        message.senderId === props.auth?.user.id ? "my_message" : "message";
-      const isMyMessage = messageClassName === "my_message";
-      const senderImage = message.sender.image ?? "/user-icon.png";
-      return (
-        <div className={messageClassName} key={message.id.toString()}>
-          {!isMyMessage && (
-            <img className="message_sender_image" src={senderImage} />
-          )}
-          <div className="message_body">
-            <p className="message_sender">{message.sender.username}</p>
-            <p className="message_text">{message.text}</p>
-          </div>
-          {isMyMessage && (
-            <img className="message_sender_image" src={senderImage} />
-          )}
-        </div>
-      );
-    });
-
-  const renderedTitle = () => {
-    const conversation = props.conversations?.find((conv) => conv.id === id);
-    const conversationTitle = conversation?.name;
-    const conversationImage = conversation?.image ?? "/chat-icon.png";
-    return (
-      <div className="conversation_title">
-        <Link className="back-arrow" to="/conversation">
-          <img src="/back-arrow.png" />
-        </Link>
-        <img src={conversationImage} />
-        <p>{conversationTitle}</p>
-      </div>
-    );
-  };
+    props.messages?.map((message) => (
+      <MessageCart
+        message={message}
+        userId={props.auth?.user.id}
+        key={message.id}
+      />
+    ));
 
   return (
     <Fragment>
-      {renderedTitle()}
+      <ConversationTitle
+        conversation={props.conversations?.find((conv) => conv.id === id)}
+      />
       <div className="message_list">{renderedMessages()}</div>
-      <SendMessage />
       <div ref={messagesEndRef}></div>
+      <SendMessage />
     </Fragment>
   );
 };
