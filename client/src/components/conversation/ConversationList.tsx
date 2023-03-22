@@ -19,14 +19,24 @@ const ConversationList = (props: PropsFromRedux) => {
   }, []);
 
   const renderedConversatios = () =>
-    props.conversations?.map((conversation) => (
-      <Link className="blank_link" to={`/conversation/${conversation.id}`}>
-        <div className="conversation_item">
-          <h2>{conversation.name}</h2>
-          <h3>{conversation.id}</h3>
-        </div>
-      </Link>
-    ));
+    props.conversations?.map((conversation) => {
+      const conversationImage = conversation?.image ?? "/chat-icon.png";
+      return (
+        <Link
+          className="blank_link"
+          to={`/conversation/${conversation.id}`}
+          key={conversation.id}
+        >
+          <div className="conversation_item" key={conversation.id}>
+            <img className="conversation_image" src={conversationImage} />
+            <div>
+              <h2 className="conversation_name">{conversation.name}</h2>
+              <h3 className="conversation_desctiption">{conversation.id}</h3>
+            </div>
+          </div>
+        </Link>
+      );
+    });
 
   return (
     <div>

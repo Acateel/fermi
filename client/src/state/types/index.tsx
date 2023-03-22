@@ -8,29 +8,29 @@ export enum ActionType {
 }
 
 export interface Token {
-  token: String;
+  token: string;
   user: User;
 }
 
 export interface Conversation {
-  id: String;
+  id: string;
   createAt: Date;
-  name: String;
+  name: string;
   image: string;
 }
 
 export interface Message {
-  id: String;
+  id: string;
   createAt: Date;
-  text: String;
-  senderId: String;
+  text: string;
+  senderId: string;
   sender: User;
-  conversationId: String;
+  conversationId: string;
 }
 
 export interface User {
-  id: String;
+  id: string;
   createAt: Date;
-  username: String;
+  username: string;
   image: string;
 }
