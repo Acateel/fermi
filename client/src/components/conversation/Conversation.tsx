@@ -6,7 +6,7 @@ import {
   fetchAllConversation,
 } from "../../state/creators";
 import { Link, useParams } from "react-router-dom";
-import { Fragment, useEffect } from "react";
+import { Fragment, useEffect, useRef } from "react";
 import "./Conversation.css";
 import SendMessage from "./SendMessage";
 
@@ -34,6 +34,16 @@ const Conversation = (props: PropsFromRedux) => {
       props.removeMessages();
     };
   }, []);
+
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [props.messages]);
 
   const renderedMessages = () =>
     props.messages?.map((message) => {
@@ -77,6 +87,7 @@ const Conversation = (props: PropsFromRedux) => {
       {renderedTitle()}
       <div className="message_list">{renderedMessages()}</div>
       <SendMessage />
+      <div ref={messagesEndRef}></div>
     </Fragment>
   );
 };
