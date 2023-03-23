@@ -1,0 +1,32 @@
+.home > main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.home_logo {
+    width: 20%;
+    margin-top: 20px;
+}
+
+.home_logo_text {
+    width: 40%;
+    margin-top: -20px;
+}
+
+.home_links > a {
+    color: #62d4e3;
+    font-size: 1.5em;
+    margin: 10px;
+}
+
+.home > footer {
+    position: fixed;
+    bottom: 0;
+    margin: 20px;
+}
+
+.home > footer > a {
+    color: #335f8a;
+    margin: 0 10px;
+}
