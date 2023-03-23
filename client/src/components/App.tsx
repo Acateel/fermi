@@ -3,11 +3,12 @@ import Login from "./auth/Login";
 import Logout from "./auth/Logout";
 import Conversation from "./conversation/Conversation";
 import ConversationList from "./conversation/ConversationList";
+import Home from "./home/Home";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <div>Fermi</div>,
+    element: <Home />,
   },
   {
     path: "/login",
