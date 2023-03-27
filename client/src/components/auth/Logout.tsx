@@ -14,7 +14,7 @@ const Logout = (props: PropsFromRedux) => {
     props.signOut();
   }, []);
 
-  return <Navigate to="/login" />;
+  return <Navigate to="/" />;
 };
 
 export default connector(Logout);
