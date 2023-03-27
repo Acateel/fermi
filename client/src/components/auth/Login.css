@@ -10,14 +10,23 @@
   color: #00abb3;
 }
 
-.login > input {
+.correct_input,
+.error_input {
   margin: 10px 0px;
   padding: 5px;
-  border: 3px solid #b2b2b2;
   border-radius: 5px;
-  background-color: #b2b2b2;
   font-weight: 500;
   color: white;
+}
+
+.correct_input {
+  background-color: #b2b2b2;
+  border: 3px solid #b2b2b2;
+}
+
+.error_input {
+  background-color: lightcoral;
+  border: 3px solid lightcoral;
 }
 
 .login > input::placeholder {

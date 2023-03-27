@@ -34,6 +34,7 @@ const Registration = (props: PropsFromRedux) => {
       <label>Username</label>
       <br />
       <input
+        className="correct_input"
         type="text"
         placeholder="Enter username..."
         value={username}
@@ -43,6 +44,7 @@ const Registration = (props: PropsFromRedux) => {
       <label>Password</label>
       <br />
       <input
+        className="correct_input"
         type="password"
         placeholder="Enter password..."
         value={password}
@@ -52,6 +54,9 @@ const Registration = (props: PropsFromRedux) => {
       <label>Repeat Password</label>
       <br />
       <input
+        className={
+          password !== repeatPassword ? "error_input" : "correct_input"
+        }
         type="password"
         placeholder="Repeat password..."
         value={repeatPassword}

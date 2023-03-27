@@ -31,6 +31,7 @@ const Login = (props: PropsFromRedux) => {
       <label>Username</label>
       <br />
       <input
+        className="correct_input"
         type="text"
         placeholder="Enter username..."
         value={username}
@@ -40,6 +41,7 @@ const Login = (props: PropsFromRedux) => {
       <label>Password</label>
       <br />
       <input
+        className="correct_input"
         type="password"
         placeholder="Enter password..."
         value={password}
